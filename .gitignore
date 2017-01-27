@@ -37,3 +37,5 @@ plugin/*/bin
 example/*/bin
 test/*/bin
 doc/ref/html
+
+minko\.VC\.db
