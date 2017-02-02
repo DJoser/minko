@@ -21,7 +21,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 
 #include "minko/Common.hpp"
 #include "minko/BulletCommon.hpp"
-
 #include "minko/component/AbstractComponent.hpp"
 
 class btDynamicsWorld;
@@ -58,6 +57,8 @@ namespace minko
                 typedef std::shared_ptr<scene::Node>                                        NodePtr;
                 typedef std::shared_ptr<Collider>                                           ColliderPtr;
                 typedef std::shared_ptr<const Collider>                                     ConstColliderPtr;
+				typedef std::shared_ptr<Collider>                                           ConstraintPtr;
+				typedef std::shared_ptr<const Collider>                                     ConstConstraintPtr;
                 typedef std::shared_ptr<Renderer>                                           RendererPtr;
                 typedef std::shared_ptr<math::vec3>                                         Vector3Ptr;
                 typedef std::shared_ptr<math::mat4>                                         Matrix4x4Ptr;
@@ -151,6 +152,14 @@ namespace minko
 
                 void
                 removeCollider(ColliderPtr);
+
+				bool 
+				hasConstraint() {
+					return false;
+				}
+
+				
+				void addConstraint(ColliderPtr, ColliderPtr);
 
                 void
                 setGravity(const math::vec3&);
@@ -287,7 +296,7 @@ namespace minko
                     typedef std::shared_ptr<btRigidBody>                btRigidBodyPtr;
 
                 private:
-                    btCollisionShapePtr        _bulletCollisionShape;
+                    btCollisionShapePtr     _bulletCollisionShape;
                     btMotionStatePtr        _bulletMotionState;
                     btCollisionObjectPtr    _bulletCollisionObject;
 
