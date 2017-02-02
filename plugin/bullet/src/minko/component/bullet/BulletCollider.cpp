@@ -36,6 +36,38 @@ using namespace minko;
 using namespace minko::component;
 using namespace minko::geometry;
 
+void bullet::PhysicsWorld::addConstraint(Collider::Ptr A,Collider::Ptr B) {
+	typedef std::shared_ptr<btSliderConstraint>           btSliderConstraintPtr;
+	if (A == nullptr || B == nullptr || A->target() == nullptr || B->target() == nullptr)
+		throw std::invalid_argument("collider");
+
+	btTransform frameInA, frameInB;
+	frameInA = btTransform::getIdentity();
+	frameInB = btTransform::getIdentity();
+
+	auto foundColliderIt = _colliderMap.find(A);
+	if (foundColliderIt != _colliderMap.end())
+	{
+		auto rigidBody = foundColliderIt->second->rigidBody();
+	}
+
+
+	btRigidBody*  pRbA1 = _colliderMap[A]->rigidBody().get();
+	btRigidBody*  pRbB1 = _colliderMap[B]->rigidBody().get();
+
+
+	btSliderConstraintPtr spSlider1 = btSliderConstraintPtr(new btSliderConstraint(*pRbA1, *pRbB1, frameInA, frameInB, true));
+	spSlider1->setLowerLinLimit(-15.0F);
+	spSlider1->setUpperLinLimit(-5.0F);
+	//spSlider1->setLowerAngLimit(-SIMD_PI / 3.0F);
+	//spSlider1->setUpperAngLimit(SIMD_PI / 3.0F);
+
+
+	std::dynamic_pointer_cast<btDiscreteDynamicsWorld>(_bulletDynamicsWorld)
+		->addConstraint(spSlider1.get(), true);
+
+}
+
 bullet::PhysicsWorld::BulletCollider::BulletCollider():
     _bulletCollisionShape(nullptr),
     _bulletMotionState(nullptr),
