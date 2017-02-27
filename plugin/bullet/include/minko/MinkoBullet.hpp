@@ -33,3 +33,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include "minko/component/bullet/TriangleMeshShape.hpp"
 #include "minko/extension/PhysicsExtension.hpp"
 #include "minko/lua/BulletLuaBindingsCollection.hpp"
+#include "minko/component/bullet/Constraint.hpp"

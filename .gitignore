@@ -38,3 +38,5 @@ example/*/bin
 test/*/bin
 doc/ref/html
 node_modules
+
+minko\.VC\.db
