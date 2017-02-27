@@ -297,7 +297,7 @@ main(int argc, char** argv)
         }
     });
 
-    auto enterFrame = canvas->enterFrame()->connect([&](AbstractCanvas::Ptr canvas, float time, float deltaTime)
+    auto enterFrame = canvas->enterFrame()->connect([&](AbstractCanvas::Ptr canvas, float time, float deltaTime,bool Visible)
     {
         sceneManager->nextFrame(time, deltaTime);
     });
